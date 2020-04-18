@@ -7,6 +7,7 @@ function expandList(list) {
 
   caption.forEach(item => {
     const span = document.createElement('span');
+
     item.prepend(span);
     span.prepend(span.nextSibling);
   });
@@ -15,18 +16,18 @@ function expandList(list) {
     const target = passage.target;
     const selectedList = target.closest('[data-item]');
 
-    if(target.tagName !== 'SPAN') {
+    if (target.tagName !== 'SPAN') {
       return;
     }
 
-    [... selectedList.children].map(child => {
-      let isHidden = child.hidden? false: true;
-      if(child.tagName !== 'SPAN') {
-      return child.hidden = isHidden
+    [...selectedList.children].map(child => {
+      if (child.tagName !== 'SPAN') {
+        child.hidden = !child.hidden;
+
+        return child.hidden;
       }
     });
-  })
+  });
 }
 
-
-expandList(tree)
+expandList(tree);
